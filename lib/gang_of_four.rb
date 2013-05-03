@@ -1,5 +1,3 @@
-require 'gang_of_four/version'
 
-module GangOfFour
-  # Your code goes here...
-end
+require 'gang_of_four/cli'
+require 'gang_of_four/version'

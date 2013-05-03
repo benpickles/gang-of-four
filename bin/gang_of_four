@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require 'gang_of_four'
+
+GangOfFour::Cli.new($stdin, $stdout).start
