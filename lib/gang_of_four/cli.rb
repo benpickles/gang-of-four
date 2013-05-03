@@ -4,11 +4,12 @@ module GangOfFour
 
     def initialize(stdin, stdout)
       @stdin, @stdout = stdin, stdout
+      @discoverer = Discoverer.new
       @state = nil
     end
 
     def start
-      #@discoverer = Discoverer.new(server, name)
+      #discoverer.discover
 
       loop do
         case state
@@ -17,10 +18,15 @@ module GangOfFour
         when :named
           ask_user_create_or_join_game
         when :join_game
-          choose_an_opponent
-        when :opponent_chosen
-          puts 'opponent chosen'
+          #choose_an_opponent
+          puts 'choose an opponent'
           exit
+        when :create_game
+          create_game
+        when :waiting_for_opponent
+        when :ready_to_start
+          # turn off discoverer
+          # turn off advertiser
         end
       end
     end
@@ -64,7 +70,7 @@ module GangOfFour
               stdout.puts "#{number}. #{opponent.name}"
             end
 
-            choice = stdin.getc.chomp
+            choice = stdin.gets.chomp
 
             if choice == 'r'
               break
@@ -81,6 +87,25 @@ module GangOfFour
           stdout.puts 'Looking for more opponents...'
           sleep 1
         end
+      end
+
+      def create_game
+        @server = Server.new
+        server.run
+
+        @client = Client.new(server)
+        client.login
+
+        stdout.puts "You are player #{client.player_id}"
+
+        client.on_event do |name, args|
+          @state = :ready_to_start
+        end
+
+        @advertiser = Advertiser.new(server, name)
+        advertiser.advertise
+
+        @state = :waiting_for_opponent
       end
   end
 end

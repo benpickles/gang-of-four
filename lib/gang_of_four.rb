@@ -1,5 +1,12 @@
+require 'socket'
+require 'thread'
+
 require 'gang_of_four/advertiser'
 require 'gang_of_four/cli'
+require 'gang_of_four/client'
+require 'gang_of_four/connection'
 require 'gang_of_four/discoverer'
+require 'gang_of_four/message'
 require 'gang_of_four/opponent'
+require 'gang_of_four/server'
 require 'gang_of_four/version'
