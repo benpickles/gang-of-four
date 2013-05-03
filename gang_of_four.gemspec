@@ -6,7 +6,7 @@ require 'gang_of_four/version'
 Gem::Specification.new do |spec|
   spec.name          = 'gang_of_four'
   spec.version       = GangOfFour::VERSION
-  spec.authors       = ['Ben Pickles']
+  spec.authors       = ['Ben Pickles', 'Tom Wey', 'Lee Machin']
   spec.email         = ['spideryoung@gmail.com']
   spec.description   = %q{TODO: Write a gem description}
   spec.summary       = %q{TODO: Write a gem summary}
